@@ -1,0 +1,31 @@
+<!-- base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Custom styles for this template -->
+    <!-- <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    <div class="container text-center">
+      <div  style=""class="nav">
+        <ul >
+          <li ><a href="/">About</a></li>
+          <li ><a href="/demo">Live demo</a></li>
+        </ul>
+      </div>
+     <h1 id="pyday" align="center" style="color:blue; ">Azure PyDay</h1>
+      {% block body %}
+      {% endblock %}
+      <footer class="footer">
+  
+      </footer>
+    </div> <!-- /container -->
+  </body>
+</html>

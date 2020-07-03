@@ -1,0 +1,28 @@
+<!-- index.html-->
+
+{% extends "base.html" %}
+{% block title %},kkj{% endblock %}
+{% block body %}
+<div>
+  <h1>Live Demo</h1>
+  <div class="row">
+    
+    <div class="col-sm-6 col-md-6 col-xs-12" >
+      <h1>Image Upload</h1>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-xs-12">
+      <h2>Live capture</h2>
+      <div style="margin-top: 50px;">
+        <form action = "/success" method = "post" enctype="multipart/form-data">  
+          <input type="file" name="file" />  
+          <input type = "submit" value="Upload">  
+      </form>
+        </form>
+      </div>
+    </div>
+
+  </div>
+ 
+</div>
+{% endblock %}
