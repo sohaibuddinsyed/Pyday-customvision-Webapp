@@ -1,6 +1,20 @@
 from .files import *
 import cv2
 
+
+
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
+
 class Camera(object):
   def __init__(self):
     self.cap = cv2.VideoCapture(0)
@@ -26,6 +40,9 @@ def video_feed():
 def home():
     return render_template("home.html")
 
+def redirecting():
+    return render_template("demo.html")
+
 
 @app.route('/demo')
 def demo():
@@ -37,7 +54,7 @@ def success1():
     if request.method == 'POST':  
         # imagefile = request.files.get('imagefile', '')
         # f = request.files['file']
-
+        # Response.delete_cookie()
         ret,img = cv2.VideoCapture(0).read()
         cv2.imwrite(os.path.join(app.root_path, "static","test1.jpg"),img)
         # imagefile.save(os.path.join(app.root_path, "static","test1.jpeg")) 
@@ -84,25 +101,3 @@ def success():
                 result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
 
         return render_template("success.html", result = result)  
-
-
-# import cv2
-# class Camera(object):
-#   def __init__(self):
-#     self.cap = cv2.VideoCapture(0)
-
-#   def get_frame(self):
-#     ret, frame = self.cap.read()
-    # return open('stream.jpg', 'rb').read()
-
-# def gen(camera):
-#   while True:
-#     frame = camera.get_frame()
-#     yield (b'--frame\r\n'
-#       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-# @app.route('/')
-# def video_feed():
-#   return Response(gen(Camera()),
-#   mimetype='multipart/x-mixed-replace;boundary=frame') 
-
