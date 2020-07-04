@@ -1,8 +1,6 @@
 from .files import *
 import cv2
 
-
-
 @app.after_request
 def add_header(r):
     """
@@ -43,21 +41,15 @@ def home():
 def redirecting():
     return render_template("demo.html")
 
-
 @app.route('/demo')
 def demo():
     return render_template("demo.html")
 
-
 @app.route('/success1', methods = ['POST'])  
 def success1():  
     if request.method == 'POST':  
-        # imagefile = request.files.get('imagefile', '')
-        # f = request.files['file']
-        # Response.delete_cookie()
         ret,img = cv2.VideoCapture(0).read()
         cv2.imwrite(os.path.join(app.root_path, "static","test1.jpg"),img)
-        # imagefile.save(os.path.join(app.root_path, "static","test1.jpeg")) 
         prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
         predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
 
@@ -69,20 +61,6 @@ def success1():
                 result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
 
         return render_template("success1.html",result = result)  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @app.route('/success', methods = ['POST'])  
 def success():  
