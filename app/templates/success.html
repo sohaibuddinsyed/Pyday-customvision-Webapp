@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %}success{% endblock %}
 {% block body %}
-<div>
+<div align="center">
     <p>File uploaded successfully</p>  
+    <p>Results:<br><h2>{{result}}</h2> </p> 
     <img src="../static/test.jpg" alt="Image">
-    <p>File Name: {{result}}</p>  
 </div>
 {% endblock %}

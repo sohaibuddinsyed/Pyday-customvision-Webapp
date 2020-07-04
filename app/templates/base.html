@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Azure PyDay{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
  </head>
 
   <body>
-    <div class="container text-center">
-      <div  style=""class="nav">
+    <div class="container">
+      <div style="background-color: aliceblue;"class="nav">
         <ul >
           <li ><a href="/">About</a></li>
-          <li ><a href="/demo">Live demo</a></li>
+          <li ><a href="/demo">Live-demo</a></li>
+          <img style=" padding: 10px 0px; float:right; width:80px;" src="../static/MSS logo circle.png">
         </ul>
+        
       </div>
-     <h1 id="pyday" align="center" style="color:blue; ">Azure PyDay</h1>
+     <h1 class="pyday-head"id="pyday" align="center" style="">Azure PyDay</h1>
       {% block body %}
       {% endblock %}
       <footer class="footer">
   
       </footer>
-    </div> <!-- /container -->
+    </div> 
+    <img style="width:270px; float: right;"src="../static/earth.jpg">
+    <!-- <img src="../static/pyday_1.jpg"> -->
+    
   </body>
 </html>

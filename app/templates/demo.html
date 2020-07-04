@@ -4,27 +4,27 @@
 
 </style>
 <div>
-  <h1>Live Demo</h1>
+  <!-- <h1>Live Demo</h1> -->
   <div class="row">
     
     <div class="col-sm-6 col-md-6 col-xs-12" >
-      <h1>Image Upload</h1>
+      <h1 align="center">Image Upload</h1>
       <div style="margin-top: 50px;">
         <form action = "/success" method = "post" enctype="multipart/form-data">  
           <input type="file" name="file" />
-          <input type = "submit" value="Upload">  
+          <input class="button"type = "submit" value="Upload">  
         </form>
       </div>
     </div>
 
     <div class="col-sm-6 col-md-6 col-xs-12">
-      <h2>Live capture</h2>
+      <h2 align="center">Live capture</h2>
 
-      <image id="bg" height="300px" width="300px" src="{{ url_for('video_feed') }}">
+      <image style="margin:10px 130px;"id="bg" height="300px" width="300px" src="{{ url_for('video_feed') }}">
       <form action = "/success1" method = "post" enctype="multipart/form-data">  
         <!-- <input type="image" name="file" /> -->
         <input type="file" name="imagefile" id="imagefile" style="display: none;"/>
-        <input type="submit" value="Upload">  
+        <input class="button" type="submit" value="Upload">  
       </form>
 
     </div>

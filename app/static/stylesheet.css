@@ -1,3 +1,27 @@
+body{
+  background-color:aliceblue;
+}
+p{
+  font-size: 25px;
+}
+.button {
+
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white; 
+  color: black; 
+  border: 2px solid black;
+}
+.button:hover {
+  background-color: #008CBA;
+  color: white;
+}
 ul {
   list-style-type: none;
   margin: 0;
@@ -5,8 +29,11 @@ ul {
   overflow: hidden;
   text-align: center;
 }
-#pyday{
-color: blue;
+.pyday-head{
+  color:rgb(51, 51, 218); 
+  font-size: 80px; 
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-bottom: 20px;
 }
 li {
   float: left;
@@ -14,7 +41,8 @@ li {
 }
 
 li a {
+  list-style-type: none;
+  font-size:30px;
   display: block;
-  padding: 8px;
-  background-color: #dddddd;
+  padding: 12px 20px;
 }
