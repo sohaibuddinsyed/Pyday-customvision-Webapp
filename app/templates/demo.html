@@ -1,28 +1,94 @@
-<!-- index.html-->
-
 {% extends "base.html" %}
 {% block title %},kkj{% endblock %}
 {% block body %}
+
+</style>
 <div>
   <h1>Live Demo</h1>
   <div class="row">
     
     <div class="col-sm-6 col-md-6 col-xs-12" >
       <h1>Image Upload</h1>
-    </div>
-
-    <div class="col-sm-6 col-md-6 col-xs-12">
-      <h2>Live capture</h2>
       <div style="margin-top: 50px;">
         <form action = "/success" method = "post" enctype="multipart/form-data">  
           <input type="file" name="file" />
           <input type = "submit" value="Upload">  
-      </form>
         </form>
       </div>
     </div>
 
+    <div class="col-sm-6 col-md-6 col-xs-12">
+      <h2>Live capture</h2>
+
+      <image id="bg" height="300px" width="300px" src="{{ url_for('video_feed') }}">
+      <form action = "/success1" method = "post" enctype="multipart/form-data">  
+        <!-- <input type="image" name="file" /> -->
+        <input type="file" name="imagefile" id="imagefile" style="display: none;"/>
+        <input type="submit" value="Upload">  
+      </form>
+
+    </div>
   </div>
- 
+
+</div>
+
 </div>
 {% endblock %}
+
+<!-- <video id="myVideo" autoplay></video>
+<script>
+
+  let v = document.getElementById("myVideo");
+
+  //create a canvas to grab an image for upload
+  let imageCanvas = document.createElement('canvas');
+  let imageCtx = imageCanvas.getContext("2d");
+
+  //Add file blob to a form and post
+  function postFile(file) {
+      let formdata = new FormData();
+      formdata.append("image", file);
+      let xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:5000/image', true);
+      xhr.onload = function () {
+          if (this.status === 200)
+              console.log(this.response);
+          else
+              console.error(xhr);
+      };
+      xhr.send(formdata);
+  }
+
+  //Get the image from the canvas
+  function sendImagefromCanvas() {
+
+      //Make sure the canvas is set to the current video size
+      imageCanvas.width = v.videoWidth;
+      imageCanvas.height = v.videoHeight;
+
+      imageCtx.drawImage(v, 0, 0, v.videoWidth, v.videoHeight);
+
+      //Convert the canvas to blob and post the file
+      imageCanvas.toBlob(postFile, 'image/jpeg');
+  }
+
+  //Take a picture on click
+  v.onclick = function() {
+      console.log('click');
+      sendImagefromCanvas();
+  };
+
+  window.onload = function () {
+
+      //Get camera video
+      navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720}, audio: false})
+          .then(stream => {
+              v.srcObject = stream;
+          })
+          .catch(err => {
+              console.log('navigator.getUserMedia error: ', err)
+          });
+
+  };
+
+</script> -->

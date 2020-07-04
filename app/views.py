@@ -1,22 +1,70 @@
-# views.py
+from .files import *
+import cv2
 
-from flask import *
-import os
-from azure.cognitiveservices.vision.customvision.prediction import CustomVisionPredictionClient
-from msrest.authentication import ApiKeyCredentials
+class Camera(object):
+  def __init__(self):
+    self.cap = cv2.VideoCapture(0)
 
-prediction_key = "21dcf849cf844333a0c1f45f6e5937aa"
-publish_iteration_name = "classifyModel"
-ENDPOINT = "https://testcvp.cognitiveservices.azure.com/"
-projectId = "dc248edb-8a7d-4314-90a7-0494403301a3"
+  def get_frame(self):
+    ret, frame = self.cap.read()
+    ret, jpg = cv2.imencode('.jpg', frame)
+    return jpg.tobytes()
+    
+def gen(camera):
+  while True:
+    frame = camera.get_frame()
+    yield (b'--frame\r\n'
+      b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-from app import app
-
+@app.route('/video_feed')
+def video_feed():
+  return Response(gen(Camera()),
+  mimetype='multipart/x-mixed-replace;boundary=frame') 
+ 
 @app.route('/', methods=['GET','POST'])
 def home():
-    
     return render_template("home.html")
+
+
+@app.route('/demo')
+def demo():
+    return render_template("demo.html")
+
+
+@app.route('/success1', methods = ['POST'])  
+def success1():  
+    if request.method == 'POST':  
+        # imagefile = request.files.get('imagefile', '')
+        # f = request.files['file']
+
+        ret,img = cv2.VideoCapture(0).read()
+        cv2.imwrite(os.path.join(app.root_path, "static","test1.jpg"),img)
+        # imagefile.save(os.path.join(app.root_path, "static","test1.jpeg")) 
+        prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
+        predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
+
+        with open(app.root_path + "/static/test1.jpg", "rb") as image_contents:
+            results = predictor.classify_image(
+                projectId, publish_iteration_name, image_contents.read())
+            result=""
+            for prediction in results.predictions:
+                result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
+
+        return render_template("success1.html",result = result)  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route('/success', methods = ['POST'])  
@@ -38,6 +86,23 @@ def success():
         return render_template("success.html", result = result)  
 
 
-@app.route('/demo')
-def demo():
-    return render_template("demo.html")
+# import cv2
+# class Camera(object):
+#   def __init__(self):
+#     self.cap = cv2.VideoCapture(0)
+
+#   def get_frame(self):
+#     ret, frame = self.cap.read()
+    # return open('stream.jpg', 'rb').read()
+
+# def gen(camera):
+#   while True:
+#     frame = camera.get_frame()
+#     yield (b'--frame\r\n'
+#       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+# @app.route('/')
+# def video_feed():
+#   return Response(gen(Camera()),
+#   mimetype='multipart/x-mixed-replace;boundary=frame') 
+
