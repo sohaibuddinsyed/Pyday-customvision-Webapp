@@ -1,6 +1,7 @@
-from .files import *
+from .headers import *
 import cv2
 
+# PRevents the application from caching the inputs to the browser
 @app.after_request
 def add_header(r):
     """
@@ -13,6 +14,7 @@ def add_header(r):
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
 
+# Aclass that defines,initializes and generates input from the device camera
 class Camera(object):
   def __init__(self):
     self.cap = cv2.VideoCapture(0)
@@ -45,23 +47,7 @@ def redirecting():
 def demo():
     return render_template("demo.html")
 
-@app.route('/success1', methods = ['POST'])  
-def success1():  
-    if request.method == 'POST':  
-        ret,img = cv2.VideoCapture(0).read()
-        cv2.imwrite(os.path.join(app.root_path, "static","test1.jpg"),img)
-        prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
-        predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
-
-        with open(app.root_path + "/static/test1.jpg", "rb") as image_contents:
-            results = predictor.classify_image(
-                projectId, publish_iteration_name, image_contents.read())
-            result=""
-            for prediction in results.predictions:
-                result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
-
-        return render_template("success1.html",result = result)  
-
+# Route triggered whn the upload is successful
 @app.route('/success', methods = ['POST'])  
 def success():  
     if request.method == 'POST':  
@@ -79,3 +65,23 @@ def success():
                 result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
 
         return render_template("success.html", result = result)  
+
+
+# Route triggered whn the Live capture is successful
+@app.route('/success1', methods = ['POST'])  
+def success1():  
+    if request.method == 'POST':  
+        ret,img = cv2.VideoCapture(0).read()
+        cv2.imwrite(os.path.join(app.root_path, "static","test1.jpg"),img)
+        prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
+        predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
+
+        with open(app.root_path + "/static/test1.jpg", "rb") as image_contents:
+            results = predictor.classify_image(
+                projectId, publish_iteration_name, image_contents.read())
+            result=""
+            for prediction in results.predictions:
+                result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
+
+        return render_template("success1.html",result = result)  
+
