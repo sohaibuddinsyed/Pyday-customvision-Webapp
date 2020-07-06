@@ -4,6 +4,14 @@ body{
 p{
   font-size: 25px;
 }
+@media(min-width: 720px){
+  .bodyclass{
+    background-image: url(../static/bg-test.png);
+    background-repeat: no-repeat; 
+    background-size: cover;  
+  }
+}
+
 .button {
 
   padding: 16px 32px;
