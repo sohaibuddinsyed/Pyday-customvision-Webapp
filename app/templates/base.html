@@ -8,24 +8,26 @@
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
  </head>
 
-  <body>
-    <div class="container">
-      <div style="background-color: aliceblue;"class="nav">
-        <ul >
-          <li ><a href="/">About</a></li>
-          <li ><a href="/demo">Live-demo</a></li>
-          <img style=" padding: 10px 0px; float:right; width:80px;" src="../static/MSS logo circle.png">
-        </ul>
-        
-      </div>
+  <body style="background-image: url(../static/bg.jpg); background-repeat: no-repeat; background-size: cover;">
+    <div class="nav">
+      <ul >
+        <li ><a href="/">About</a></li>
+        <li ><a href="/demo">Live-demo</a></li>
+        <img style=" padding: 10px 0px; float:right; width:80px; margin-right: 10px;" src="../static/MSS logo circle.png">
+      </ul>
+      
+    </div>
+
+    <div class="container text-center">
+      
      <h1 class="pyday-head"id="pyday" align="center" >Azure PyDay</h1>
       {% block body %}
       {% endblock %}
       <footer class="footer">
-  
+        <img style="width:180px; float: right;"src="../static/earth.jpg">
       </footer>
     </div> 
-    <img style="width:220px; float: right;"src="../static/earth.jpg">
+    
     <!-- <img src="../static/pyday_1.jpg"> -->
     
   </body>

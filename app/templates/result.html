@@ -3,7 +3,10 @@
 {% block body %}
 <div align="center">
     <p>File uploaded successfully</p>  
-    <p>Results:<br><h2>{{result}}</h2> </p> 
-    <img src="../static/test.jpg" alt="Image">
+    <p>Results:<br><h3>{{result}}</h3> </p> 
+    <img src="../static/test.jpg" width="320px" height="310px" alt="Image">
+    <form action = "/demo">
+        <input class="button"type="submit" value="Try It" >
+    </form>
 </div>
 {% endblock %}
