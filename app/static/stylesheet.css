@@ -11,7 +11,7 @@ p{
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 2px;
   transition-duration: 0.4s;
   cursor: pointer;
   background-color: white; 
@@ -31,7 +31,7 @@ ul {
 }
 .pyday-head{
   color:rgb(51, 51, 218); 
-  font-size: 80px; 
+  font-size: 60px; 
   font-family: Georgia, 'Times New Roman', Times, serif;
   margin-bottom: 20px;
 }
