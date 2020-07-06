@@ -48,7 +48,7 @@ def demo():
     return render_template("demo.html")
 
 # Route triggered whn the upload is successful
-@app.route('/success', methods = ['POST'])  
+@app.route('/result', methods = ['POST'])  
 def success():  
     if request.method == 'POST':  
         f = request.files['file']
@@ -64,11 +64,11 @@ def success():
             for prediction in results.predictions:
                 result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
 
-        return render_template("success.html", result = result)  
+        return render_template("result.html", result = result)  
 
 
 # Route triggered whn the Live capture is successful
-@app.route('/success1', methods = ['POST'])  
+@app.route('/result-capture', methods = ['POST'])  
 def success1():  
     if request.method == 'POST':  
         ret,img = cv2.VideoCapture(0).read()
@@ -83,5 +83,5 @@ def success1():
             for prediction in results.predictions:
                 result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
 
-        return render_template("success1.html",result = result)  
+        return render_template("result-capture.html",result = result)  
 
