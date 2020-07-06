@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Local image Demo{% endblock %}
+{% block body %}
+
+<div>
+  <div class="row">
+    
+    <div class="col-sm-12 col-md-12 col-xs-12 text-center" >
+      <h1 align="center" style="color: black;">Image Upload</h1>
+      <p>Upload an image file to classify</p>
+      <div style="margin-top: 50px;">
+        <form action = "/result" onsubmit="required(file)"method = "post" enctype="multipart/form-data">  
+          <input class="button" type="file" name="file" accept=".jpg,jpeg,.png" style="color: black; margin-left: 500px;"  />
+          <input class="button"type = "submit" value="Upload" name="file"style="margin-top:115px;">  
+        </form>
+      </div>
+    </div>
+
+    
+  </div>
+
+</div>
+
+</div>
+
+<script>
+  function required(inputtx) 
+   {
+     if (inputtx.value.length == 0)
+      { 
+         alert("You cannot upload an empty field.\nChoose an image file !");  
+         window.location = '/capture'	
+         return false; 
+      }  	
+      return true; 
+    } 
+</script>
+
+
+{% endblock %}

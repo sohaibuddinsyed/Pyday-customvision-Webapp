@@ -3,6 +3,7 @@ body{
 }
 p{
   font-size: 25px;
+  font-family: monospace;
 }
 @media(min-width: 720px){
   .bodyclass{
@@ -16,9 +17,9 @@ p{
 
   padding: 16px 32px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  font-family: monospace;
   margin: 2px;
   transition-duration: 0.4s;
   cursor: pointer;
@@ -26,9 +27,26 @@ p{
   color: black; 
   border: 2px solid black;
 }
+
+.result {
+
+  padding: 16px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 30px;
+  font-family: monospace;
+  margin: 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  /* background-color: white;  */
+  color: black; 
+  border: 3px solid green;
+}
+
 .button:hover {
-  background-color: #008CBA;
-  color: white;
+  background-color: gainsboro;
+  color: black;
+  font-weight: bolder;
 }
 ul {
   list-style-type: none;
@@ -53,4 +71,32 @@ li a {
   font-size:30px;
   display: block;
   padding: 12px 20px;
+}
+.wrapper {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typing-demo {
+  width: 51ch;
+  animation: typing 2s steps(10000), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: monospace;
+  font-size: 2em;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+    
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
 }

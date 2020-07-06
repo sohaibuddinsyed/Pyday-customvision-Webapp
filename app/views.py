@@ -41,11 +41,36 @@ def home():
     return render_template("home.html")
 
 def redirecting():
-    return render_template("demo.html")
+    return render_template("capture.html")
+ 
 
-@app.route('/demo')
-def demo():
-    return render_template("demo.html")
+@app.route('/capture')
+def capture():
+    return render_template("capture.html")
+
+
+@app.route('/livecapture')
+def livecapture():
+    return render_template("livecapture.html")
+
+
+@app.route('/live', methods = ['POST'])
+def live():  
+        ret,img = cv2.VideoCapture(0).read()
+        cv2.imwrite(os.path.join(app.root_path, "static","test1.jpg"),img)
+        prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
+        predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
+
+        with open(app.root_path + "/static/test1.jpg", "rb") as image_contents:
+            results = predictor.classify_image(
+                projectId, publish_iteration_name, image_contents.read())
+            result=""
+            for prediction in results.predictions:
+                result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
+
+        return render_template("live.html",result = result)  
+   
+
 
 # Route triggered whn the upload is successful
 @app.route('/result', methods = ['POST'])  
@@ -62,7 +87,7 @@ def success():
                 projectId, publish_iteration_name, image_contents.read())
             result=""
             for prediction in results.predictions:
-                result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
+                result += "\t\t\n" + prediction.tag_name + " : {0:.2f}% ".format(prediction.probability * 100)
 
         return render_template("result.html", result = result)  
 
@@ -84,4 +109,6 @@ def success1():
                 result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
 
         return render_template("result-capture.html",result = result)  
+
+
 

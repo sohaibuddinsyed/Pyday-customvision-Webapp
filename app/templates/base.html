@@ -4,7 +4,6 @@
     <title>{% block title %}Azure PyDay{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
  </head>
 
@@ -12,23 +11,16 @@
     <div class="nav">
       <ul >
         <li ><a href="/">About</a></li>
-        <li ><a href="/demo">Live-demo</a></li>
+        <li ><a href="./capture">Local-Upload</a></li>
+        <li ><a href="./livecapture">Live-Capture</a></li>
+        <!-- <li ><a href="./live">Live-Capture</a></li> -->
         <img style=" padding: 10px 0px; float:right; width:60px; margin-right: 10px;" src="../static/MSS logo circle.png">
       </ul>
       
     </div>
-
-    <!-- <div class="container text-center"> -->
-      
-     <h1 class="pyday-head" id="pyday" align="center" >Azure PyDay</h1>
+     
       {% block body %}
       {% endblock %}
-      <!-- <footer class="footer">
-        <img style="width:180px; float: right;"src="../static/earth.jpg">
-      </footer> -->
-    <!-- </div>  -->
-    
-    <!-- <img src="../static/pyday_1.jpg"> -->
-    
+      
   </body>
 </html>

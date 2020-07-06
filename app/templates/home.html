@@ -2,19 +2,27 @@
 {% block title %}Home{% endblock %}
 {% block body %}
 <div class="text-center" style="color: black;" >
-  <!-- <h1>Welcome to the app</h1> -->
-  <!-- <h1 align="center" >
-    Learn as an individual<br>
-    Host as a Community<br>
-    #AzurePyday</h1> -->
 
+  <h1 class="pyday-head" id="pyday" align="center" >Azure PyDay</h1>
+    
+  <div class="wrapper">
+    <div class="typing-demo">
+        Communicate. Collaborate. Connect. Just like before. 
+    </div>
+  </div>
+  
   <h3 style="font-family: Arial, Helvetica, sans-serif; margin-bottom: 30px;" >
-    Communicate. Collaborate. Connect. Just like before. <br>#WeAreTogether<br>
-    In these challenging times, we will rise against the miles between us.<br> Together, we will ensure that you and the community stay connected.
+    <p>
+      <br>#WeAreTogether<br>
+      In these challenging times, we will rise against the miles between us.
+      <br> Together, we will ensure that you and the community stay connected.
+    </p>
   </h3>
 
-  <form action = "/demo">
-    <input class="button"type="submit" value="Try It" >
-</form>
+  <form action = "/capture">
+    <input class="button"type="submit" value="Try uploading an image" >
+  </form>
+  <footer><p style="margin-left: px;margin-top: 100px;"><a href="https://linkedin.com/in/syed-sohaib-uddin/">Follow me</a></p></footer>
+
 </div>
 {% endblock %}
