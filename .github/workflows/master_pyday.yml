@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@master
@@ -18,17 +18,20 @@ jobs:
     - name: Set up Python version
       uses: actions/setup-python@v1
       with:
-        python-version: '3.7'
+        python-version: '3.6'
 
-    - name: Build using AppService-Build
-      uses: azure/appservice-build@v1
-      with:
-        platform: python
-        platform-version: '3.7'
+    - name: Install Python dependencies
+      run: |
+        python3 -m venv env
+        source env/bin/activate
+        pip install -r requirements.txt
+    - name: Zip the application files
+      run: zip -r myapp.zip .
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
       with:
         app-name: 'pyday'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f5abb74b9cd645dabf65d06e9b165436 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_646d7b48946041ef96c26289272cd3e5 }}
+        package: './myapp.zip'
