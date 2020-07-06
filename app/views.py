@@ -1,5 +1,5 @@
 from .headers import *
-# import cv2
+import cv2
 
 # PRevents the application from caching the inputs to the browser
 @app.after_request
@@ -31,10 +31,10 @@ def gen(camera):
       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-# @app.route('/video_feed')
-# def video_feed():
-#   return Response(gen(Camera()),
-#   mimetype='multipart/x-mixed-replace;boundary=frame') 
+@app.route('/video_feed')
+def video_feed():
+  return Response(gen(Camera()),
+  mimetype='multipart/x-mixed-replace;boundary=frame') 
  
 @app.route('/', methods=['GET','POST'])
 def home():
@@ -68,20 +68,20 @@ def success():
 
 
 # Route triggered whn the Live capture is successful
-# @app.route('/result-capture', methods = ['POST'])  
-# def success1():  
-#     if request.method == 'POST':  
-#         ret,img = cv2.VideoCapture(0).read()
-#         cv2.imwrite(os.path.join(app.root_path, "static","test1.jpg"),img)
-#         prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
-#         predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
+@app.route('/result-capture', methods = ['POST'])  
+def success1():  
+    if request.method == 'POST':  
+        ret,img = cv2.VideoCapture(0).read()
+        cv2.imwrite(os.path.join(app.root_path, "static","test1.jpg"),img)
+        prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": prediction_key})
+        predictor = CustomVisionPredictionClient(ENDPOINT, prediction_credentials)
 
-#         with open(app.root_path + "/static/test1.jpg", "rb") as image_contents:
-#             results = predictor.classify_image(
-#                 projectId, publish_iteration_name, image_contents.read())
-#             result=""
-#             for prediction in results.predictions:
-#                 result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
+        with open(app.root_path + "/static/test1.jpg", "rb") as image_contents:
+            results = predictor.classify_image(
+                projectId, publish_iteration_name, image_contents.read())
+            result=""
+            for prediction in results.predictions:
+                result += "\t" + prediction.tag_name + ": {0:.2f}%".format(prediction.probability * 100)
 
-#         return render_template("result-capture.html",result = result)  
+        return render_template("result-capture.html",result = result)  
 
